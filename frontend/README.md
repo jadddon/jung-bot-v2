@@ -20,7 +20,6 @@ A modern, responsive frontend for the Jung AI Analysis System built with Next.js
 - **Authentication**: Supabase Auth
 - **API Client**: Axios with interceptors
 - **Icons**: Lucide React
-- **Animations**: Framer Motion
 - **TypeScript**: Full type safety
 
 ## 📱 Components
