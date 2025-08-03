@@ -1,4 +1,6 @@
 
+## 🚀 **[Try Jung AI Live →](https://jung-bot.vercel.app/)**
+
 # Jung AI - Analytical Psychology Chatbot
 
 ## 🌙 **The Story Behind This Project**
