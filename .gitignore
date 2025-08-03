@@ -1,0 +1,12 @@
+# Environment variables
+.env
+.env.*
+backend/.env
+backend/.env.*
+frontend/.env.local
+frontend/.env.*
+
+# Exclude large Jung text data files
+data/raw/Jung_data_raw/
+data/processed/*.txt
+*.txt
