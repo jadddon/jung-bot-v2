@@ -19,12 +19,14 @@ RUN useradd --create-home --shell /bin/bash app
 # Set work directory
 WORKDIR /app
 
-# Copy requirements and install dependencies (use absolute path to avoid context issues)
-COPY backend/requirements.txt /tmp/requirements.txt
+# IMPORTANT: Railway sets the Docker build context to the directory containing this Dockerfile (backend/)
+# So sources should NOT be prefixed with "backend/" here.
+# Copy requirements and install dependencies
+COPY requirements.txt /tmp/requirements.txt
 RUN python -m pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Copy application code
-COPY backend/ /app/
+COPY . /app/
 
 # Change ownership to app user
 RUN chown -R app:app /app
