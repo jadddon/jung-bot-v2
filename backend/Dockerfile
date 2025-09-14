@@ -36,12 +36,12 @@ USER app
 RUN chmod +x /app/scripts/* 2>/dev/null || true
 RUN chmod +x /app/start.sh
 
-# Health check for Railway
+# Health check for Railway - use PORT environment variable
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')" || exit 1
+  CMD python -c "import urllib.request; import os; urllib.request.urlopen(f'http://localhost:{os.environ.get(\"PORT\", 8000)}/health')" || exit 1
 
 # Expose port (Railway will set PORT environment variable)
 EXPOSE 8000
 
-# Run the application with Railway optimization
-CMD ["python", "-c", "import os; import uvicorn; port=int(os.environ.get('PORT', 8000)); uvicorn.run('api.main:app', host='0.0.0.0', port=port, workers=1, log_level='info')"] 
+# Run the application with Railway optimization - use start.sh script
+CMD ["./start.sh"] 
