@@ -19,12 +19,12 @@ RUN useradd --create-home --shell /bin/bash app
 # Set work directory
 WORKDIR /app
 
-# Copy requirements and install dependencies
-COPY backend/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy requirements and install dependencies (use absolute path to avoid context issues)
+COPY backend/requirements.txt /tmp/requirements.txt
+RUN python -m pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Copy application code
-COPY backend/ .
+COPY backend/ /app/
 
 # Change ownership to app user
 RUN chown -R app:app /app
