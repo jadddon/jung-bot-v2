@@ -1,0 +1,22 @@
+# Simple Railway Dockerfile - Backup approach
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Set work directory
+WORKDIR /app
+
+# Copy requirements and install dependencies
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY backend/ .
+
+# Expose port
+EXPOSE 8000
+
+# Simple startup command
+CMD python -c "import os; import uvicorn; port=int(os.environ.get('PORT', 8000)); uvicorn.run('api.main:app', host='0.0.0.0', port=port, log_level='info')"
