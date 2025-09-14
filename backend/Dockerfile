@@ -43,5 +43,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Expose port (Railway will set PORT environment variable)
 EXPOSE 8000
 
-# Run the application with Railway optimization - use start.sh script
-CMD ["./start.sh"] 
+# Run the application with Railway optimization - use Python script for proper PORT handling
+CMD ["python", "-c", "import os; import uvicorn; port=int(os.environ.get('PORT', 8000)); print(f'Starting on port {port}'); uvicorn.run('api.main:app', host='0.0.0.0', port=port, workers=1, log_level='info')"] 

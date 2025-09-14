@@ -579,9 +579,12 @@ async def general_exception_handler(request: Request, exc: Exception):
 
 # Railway-specific startup
 if __name__ == "__main__":
-    port = int(settings.port)
+    import os
+    # Use Railway's PORT environment variable
+    port = int(os.environ.get("PORT", settings.port))
+    print(f"Starting server on port {port}")
     uvicorn.run(
-        "main:app",
+        "api.main:app",
         host=settings.host,
         port=port,
         workers=MEMORY_SETTINGS["max_workers"],
